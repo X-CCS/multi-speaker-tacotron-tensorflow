@@ -118,7 +118,7 @@ def train(log_dir, config):
 
     data_dirs = [os.path.join(data_path, "data") \
             for data_path in config.data_paths]
-    num_speakers = len(data_dirs)
+    num_speakers = 40#len(data_dirs)
     config.num_test = config.num_test_per_speaker * num_speakers
 
     if num_speakers > 1 and hparams.model_type not in ["deepvoice", "simple"]:
@@ -287,14 +287,14 @@ def main():
     parser = argparse.ArgumentParser()
 
     parser.add_argument('--log_dir', default='logs')
-    parser.add_argument('--data_paths', default='datasets/kr_example')
+    parser.add_argument('--data_paths', default='datasets/data_thchs30')
     parser.add_argument('--load_path', default=None)
     parser.add_argument('--initialize_path', default=None)
 
     parser.add_argument('--num_test_per_speaker', type=int, default=2)
     parser.add_argument('--random_seed', type=int, default=123)
     parser.add_argument('--summary_interval', type=int, default=100)
-    parser.add_argument('--test_interval', type=int, default=500)
+    parser.add_argument('--test_interval', type=int, default=1000)
     parser.add_argument('--checkpoint_interval', type=int, default=1000)
     parser.add_argument('--skip_path_filter',
             type=str2bool, default=False, help='Use only for debugging')

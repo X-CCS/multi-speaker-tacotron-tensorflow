@@ -31,8 +31,10 @@ def build_from_path(config):
     futures = []
     index = 1
 
+    print(config.metadata_path)
     base_dir = os.path.dirname(config.metadata_path)
     data_dir = os.path.join(base_dir, config.data_dirname)
+    print(data_dir)
     makedirs(data_dir)
 
     loss_coeff = defaultdict(one)

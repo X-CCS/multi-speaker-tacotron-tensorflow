@@ -43,7 +43,7 @@ def get_path_dict(
 
             min_n_frame = hparams.reduction_factor * hparams.min_iters
             max_n_frame = hparams.reduction_factor * hparams.max_iters - hparams.reduction_factor
-            
+
             new_items = [(path, n) for path, n, n_tokens in items \
                     if min_n_frame <= n <= max_n_frame and n_tokens >= hparams.min_tokens]
 
@@ -146,7 +146,7 @@ class DataFeeder(threading.Thread):
         # Create queue for buffering data:
         dtypes = [tf.int32, tf.int32, tf.float32, tf.float32, tf.float32]
 
-        self.is_multi_speaker = len(self.data_dirs) > 1
+        self.is_multi_speaker = True #len(self.data_dirs) > 1
 
         if self.is_multi_speaker:
             self._placeholders.append(
@@ -293,7 +293,6 @@ def _prepare_batch(batch, reduction_factor, rng, data_type=None):
     inputs = _prepare_inputs([x[0] for x in batch])
     input_lengths = np.asarray([len(x[0]) for x in batch], dtype=np.int32)
     loss_coeff = np.asarray([x[1] for x in batch], dtype=np.float32)
-
     mel_targets = _prepare_targets([x[2] for x in batch], reduction_factor)
     linear_targets = _prepare_targets([x[3] for x in batch], reduction_factor)
 

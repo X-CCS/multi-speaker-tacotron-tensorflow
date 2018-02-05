@@ -25,12 +25,12 @@ basic_params.update({
 
 if True:
     basic_params.update({
-        'sample_rate': 22050, #originally 24000 (krbook), 22050(lj-data), 20000(others) 
+        'sample_rate': 16000, #originally 24000 (krbook), 22050(lj-data), 20000(others) 
     })
 
 basic_params.update({
     # Model
-    'model_type': 'single', # [single, simple, deepvoice]
+    'model_type': 'deepvoice', # [single, simple, deepvoice]
     'speaker_embedding_size': f(16),
 
     'embedding_size': f(256),
@@ -125,7 +125,7 @@ basic_params.update({
     'use_fixed_test_inputs': False,
 
     'initial_learning_rate': 0.001,
-    'decay_learning_rate_mode': 0, # True in deepvoice2 paper
+    'decay_learning_rate_mode': True, # True in deepvoice2 paper
     'initial_data_greedy': True,
     'initial_phase_step': 8000,
     'main_data_greedy_factor': 0,
@@ -136,7 +136,7 @@ basic_params.update({
     'ignore_recognition_level': 0, # 0: use all, 1: ignore only unmatched_alignment, 2: fully ignore recognition
 
     # Eval
-    'min_tokens': 50,#originally 50, 30 is good for korean,
+    'min_tokens': 20,#originally 50, 30 is good for korean,
     'min_iters': 30,
     'max_iters': 200,
     'skip_inadequate': False,
