@@ -146,7 +146,7 @@ class DataFeeder(threading.Thread):
         # Create queue for buffering data:
         dtypes = [tf.int32, tf.int32, tf.float32, tf.float32, tf.float32]
 
-        self.is_multi_speaker = True #len(self.data_dirs) > 1
+        self.is_multi_speaker = len(self.data_dirs) > 1
 
         if self.is_multi_speaker:
             self._placeholders.append(

@@ -115,10 +115,14 @@ def save_and_plot(sequences, spectrograms,
 
 def train(log_dir, config):
     config.data_paths = config.data_paths
+    sub_dirs =['A11', 'A12', 'A13', 'A14', 'A19', 'A2', 'A22', 'A23', 'A32', 'A33', 'A34', 'A35', 'A36', 'A4', 'A5', 'A6', 'A7', 'A8', 'A9',
+               'B11', 'B12', 'B15','B2', 'B21', 'B22', 'B31', 'B32', 'B33', 'B34', 'B4', 'B6', 'B7', 'B8',
+               'C12', 'C13', 'C14', 'C17', 'C18', 'C19', 'C2', 'C20', 'C21', 'C22', 'C23', 'C31', 'C32', 'C4', 'C6', 'C7', 'C8',
+               'D11', 'D12', 'D13', 'D21', 'D31', 'D32', 'D4', 'D6', 'D7', 'D8',]
 
-    data_dirs = [os.path.join(data_path, "data") \
-            for data_path in config.data_paths]
-    num_speakers = 40#len(data_dirs)
+    data_dirs = [os.path.join(config.data_paths, sub_dir) for sub_dir in sub_dirs]
+    num_speakers = len(data_dirs)
+    setattr(hparams, "num_speakers", len(data_dirs))
     config.num_test = config.num_test_per_speaker * num_speakers
 
     if num_speakers > 1 and hparams.model_type not in ["deepvoice", "simple"]:
@@ -305,8 +309,6 @@ def main():
             help='If set, verify that the client is clean.')
 
     config = parser.parse_args()
-    config.data_paths = config.data_paths.split(",")
-    setattr(hparams, "num_speakers", len(config.data_paths))
 
     prepare_dirs(config, hparams)
 
